@@ -58,6 +58,7 @@ export function move(game: Game, chosenCol: ChosenCol): Game {
     if (game.grid[0][chosenCol] != null) {
         return game; // column is full
     }
+    if (game.endState) return game // game has ended
     const nextGame = structuredClone(game);
     // find highest row occupied in chosenCol
     let row = 5;
