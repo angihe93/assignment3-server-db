@@ -8,6 +8,7 @@ export type ChosenCol = 0 | 1 | 2 | 3 | 4 | 5 | 6; // column index where the pla
 export type EndState = 'red' | 'yellow' | 'draw' | undefined;
 
 export type Game = {
+    id: string,
     grid: Grid,
     currentPlayer: Player,
     endState?: EndState,
@@ -15,6 +16,7 @@ export type Game = {
 
 export const initialGameState = (): Game => {
     return {
+        id: crypto.randomUUID(),
         grid: Array.from({ length: 6 }, () => Array(7).fill(null)),
         currentPlayer: 'red',
     }
