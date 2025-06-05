@@ -2,10 +2,12 @@
 import express from "express";
 import ViteExpress from "vite-express";
 import { Connect4InMemoryApi } from './src/api'
+import { Connect4DbApi } from './src/db/db'
 
 const app = express();
 app.use(express.json());
-const api = new Connect4InMemoryApi();
+// const api = new Connect4InMemoryApi();
+const api = new Connect4DbApi();
 
 app.get("/message", (_, res) => res.send("Hello from express!"));
 

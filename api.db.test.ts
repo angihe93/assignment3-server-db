@@ -1,12 +1,11 @@
 // set of tests for in-memory version of the API
 // run `bun test`
-import { Connect4InMemoryApi } from "./api"
-import type { Game as GameState } from "./game/game"
+import { Connect4DbApi } from "./src/db/db"
 
-describe('Connect4InMemoryApi', () => {
-    let api: Connect4InMemoryApi
+describe('Connect4DbApi', () => {
+    let api: Connect4DbApi
     beforeEach(() => {
-        api = new Connect4InMemoryApi()
+        api = new Connect4DbApi()
     })
     describe('createGame', () => {
         it('should create a new game with correct initial state', async () => {
@@ -15,7 +14,7 @@ describe('Connect4InMemoryApi', () => {
             expect(game).toBeDefined() // toBeDefined assets a value is defined, not undefined
             expect(game.id).toBeDefined()
             expect(game.currentPlayer).toBe('red')
-            expect(game.endState).toBeUndefined()
+            expect(game.endState).toBeNull()
             expect(game.grid).toEqual([
                 [null, null, null, null, null, null, null],
                 [null, null, null, null, null, null, null],
