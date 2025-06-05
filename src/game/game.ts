@@ -5,9 +5,10 @@ export type Player = 'red' | 'yellow';
 export type Cell = Player | null;
 export type Grid = Cell[][];
 export type ChosenCol = 0 | 1 | 2 | 3 | 4 | 5 | 6; // column index where the player wants to drop their disc
-export type EndState = 'red' | 'yellow' | 'draw' | undefined;
+export type EndState = 'red' | 'yellow' | 'draw' | undefined | null;
 
 export type Game = {
+    id: string,
     grid: Grid,
     currentPlayer: Player,
     endState?: EndState,
@@ -15,8 +16,10 @@ export type Game = {
 
 export const initialGameState = (): Game => {
     return {
+        id: crypto.randomUUID(),
         grid: Array.from({ length: 6 }, () => Array(7).fill(null)),
         currentPlayer: 'red',
+        endState: null
     }
 }
 
@@ -56,6 +59,7 @@ export function move(game: Game, chosenCol: ChosenCol): Game {
     if (game.grid[0][chosenCol] != null) {
         return game; // column is full
     }
+    if (game.endState) return game // game has ended
     const nextGame = structuredClone(game);
     // find highest row occupied in chosenCol
     let row = 5;
